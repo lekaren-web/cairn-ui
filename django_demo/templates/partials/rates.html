@@ -1,0 +1,10 @@
+<h2 class="procedure-title">
+  {{ procedure.label }} <span class="procedure-code">{{ procedure.description }}</span>
+</h2>
+{# Django autoescapes the JSON, so it is safe inside a quoted attribute. #}
+<cn-data-table
+  caption="Negotiated rates for {{ procedure.label }}"
+  columns="{{ columns_json }}"
+  rows="{{ rows_json }}"
+  empty-text="No rates published for this procedure."
+></cn-data-table>

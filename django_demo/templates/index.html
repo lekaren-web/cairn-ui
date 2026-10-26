@@ -1,0 +1,91 @@
+{% load static %}<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Price Explorer · Cairn (Django + HTMX)</title>
+    <link rel="stylesheet" href="{% static 'tokens.css' %}" />
+    <script type="module" src="{% static 'cairn-wc.js' %}"></script>
+    <script src="https://unpkg.com/htmx.org@2.0.4" integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+" crossorigin="anonymous"></script>
+    <style>
+      *, *::before, *::after { box-sizing: border-box; }
+      body { margin: 0; background: var(--cn-color-bg); color: var(--cn-color-text); font-family: var(--cn-font-sans); }
+      .page { max-width: 68rem; margin: 0 auto; padding: var(--cn-space-8) var(--cn-space-4) 4rem; display: grid; gap: var(--cn-space-6); }
+      .masthead { display: flex; justify-content: space-between; align-items: flex-end; gap: var(--cn-space-4); flex-wrap: wrap; }
+      .masthead h1 { margin: 0; font-size: var(--cn-text-xl); letter-spacing: -0.01em; }
+      .masthead__actions { display: flex; align-items: center; gap: var(--cn-space-3); }
+      .eyebrow { margin: 0 0 var(--cn-space-1); font-size: var(--cn-text-xs); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--cn-color-text-muted); }
+      .controls { padding: var(--cn-space-4); border: 1px solid var(--cn-color-border); border-radius: var(--cn-radius-lg); background: var(--cn-color-surface); }
+      .procedure-title { margin: 0 0 var(--cn-space-4); font-size: var(--cn-text-lg); display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--cn-space-3); }
+      .procedure-code { font: 500 var(--cn-text-sm) var(--cn-font-mono); color: var(--cn-color-text-muted); }
+      .prose { max-width: 65ch; line-height: 1.6; margin: 0; }
+      #results.htmx-request { opacity: 0.5; transition: opacity var(--cn-duration-medium) var(--cn-ease); }
+      /* Avoid a flash of unstyled custom elements before the module loads. */
+      :not(:defined) { visibility: hidden; }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="masthead">
+        <div>
+          <p class="eyebrow">Cairn · Django + HTMX surface</p>
+          <h1>Price Explorer</h1>
+        </div>
+        <div class="masthead__actions">
+          <cn-badge tone="info">Sample data</cn-badge>
+          <cn-button id="about-open" variant="secondary" size="sm">How this page works</cn-button>
+        </div>
+      </header>
+
+      <section class="controls" aria-label="Search">
+        <cn-combobox
+          id="procedure"
+          label="Procedure"
+          placeholder="Search by name or CPT code"
+          hint="Picking a procedure fetches a server-rendered partial with HTMX."
+          options="{{ options_json }}"
+          model-value="{{ code }}"
+        ></cn-combobox>
+      </section>
+
+      <cn-tabs label="Procedure details" tabs="{{ tabs_json }}">
+        <div slot="rates" id="results" hx-get="/rates?code={{ code|urlencode }}" hx-trigger="load">
+          <cn-data-table caption="Negotiated rates" columns="[]" rows="[]" loading></cn-data-table>
+        </div>
+        <div slot="about">
+          <p class="prose">
+            Hospitals and payers are fictional and every price is generated sample data. This page has no Vue
+            code of its own: it loads one script, <code>cairn-wc.js</code>, and uses the same components as the
+            Vue demo as native custom elements.
+          </p>
+        </div>
+      </cn-tabs>
+    </div>
+
+    <cn-dialog id="about" title="How this page works" size="md">
+      <ul class="prose">
+        <li>Django renders the page and passes data to components as attributes (JSON for arrays).</li>
+        <li>The combobox fires a <code>change</code> event; HTMX requests <code>/rates</code> and swaps in the partial.</li>
+        <li>The partial is a <code>&lt;cn-data-table&gt;</code> whose rows come straight from the server.</li>
+        <li>Theme tokens are CSS custom properties, which inherit into each component’s shadow DOM.</li>
+      </ul>
+      <cn-button slot="footer" id="about-close" variant="secondary">Close</cn-button>
+    </cn-dialog>
+
+    <script type="module">
+      const dialog = document.getElementById('about')
+      document.getElementById('about-open').addEventListener('click', () => { dialog.open = true })
+      document.getElementById('about-close').addEventListener('click', () => { dialog.open = false })
+      // Keep the prop in sync when the dialog closes itself (Escape, backdrop, close button).
+      dialog.addEventListener('close', () => { dialog.open = false })
+
+      // Custom element events carry their payload in event.detail[0].
+      document.getElementById('procedure').addEventListener('change', (event) => {
+        const code = event.detail?.[0]
+        if (!code) return
+        htmx.ajax('GET', `/rates?code=${encodeURIComponent(code)}`, { target: '#results', swap: 'innerHTML' })
+        history.replaceState(null, '', `?code=${encodeURIComponent(code)}`)
+      })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title="Introduction" />
+
+# Cairn
+
+A small, accessible component library for data-dense product UI. Every component is a
+Vue 3 single-file component, and the same source also ships as native Web Components.
+
+| Build | Entry | Used by |
+| --- | --- | --- |
+| Vue library | `src/index.ts` | Vue apps (`demo/`) |
+| Web Components | `src/wc.ts` → `dist-wc/cairn-wc.js` | Server-rendered pages (`django_demo/`, HTMX) |
+
+## Principles
+
+- **Tokens, not values.** Components read semantic tokens such as `--cn-color-accent`, never raw colors.
+  Themes remap the semantic layer. Custom properties inherit into shadow DOM, so both builds theme the same way.
+- **Every state is designed.** Loading, refreshing, empty, error, disabled and focus states ship with the component,
+  not with each feature.
+- **Accessible by default.** Each interactive component follows its WAI-ARIA Authoring Practices pattern and has
+  keyboard and axe tests in `tests/`.
+- **Use the platform.** The dialog is a native `<dialog>`, so focus trapping and Escape come from the browser.
+
+Use the **Theme** toolbar to switch light and dark, and the **Accessibility** panel to run axe on any story.

@@ -1,0 +1,152 @@
+/*
+ * Cairn design tokens.
+ *
+ * Two layers:
+ *   1. Primitives (--cn-teal-600 ...) are raw values. Components never use them directly.
+ *   2. Semantic tokens (--cn-color-accent ...) describe intent. Components only read these,
+ *      so a theme is just a different mapping of semantic -> primitive.
+ *
+ * Custom properties inherit through shadow DOM boundaries, which is what lets the
+ * Web Component build pick up the same theme as the Vue build with no extra wiring.
+ */
+:root {
+  /* Primitives */
+  --cn-gray-0: #ffffff;
+  --cn-gray-25: #f7f9fa;
+  --cn-gray-50: #eef1f4;
+  --cn-gray-200: #d3d8de;
+  --cn-gray-400: #8a949e;
+  --cn-gray-600: #56606b;
+  --cn-gray-900: #1b2128;
+  --cn-teal-50: #e3f3f2;
+  --cn-teal-600: #0f6e6e;
+  --cn-teal-700: #0b5757;
+  --cn-red-600: #b42318;
+  --cn-red-700: #912018;
+  --cn-blue-600: #1d5fd6;
+
+  /* Semantic: surfaces and text */
+  --cn-color-bg: var(--cn-gray-25);
+  --cn-color-surface: var(--cn-gray-0);
+  --cn-color-surface-sunken: var(--cn-gray-50);
+  --cn-color-text: var(--cn-gray-900);
+  --cn-color-text-muted: var(--cn-gray-600);
+  --cn-color-border: var(--cn-gray-200);
+  --cn-color-border-strong: var(--cn-gray-400);
+
+  /* Semantic: interactive */
+  --cn-color-accent: var(--cn-teal-600);
+  --cn-color-accent-hover: var(--cn-teal-700);
+  --cn-color-accent-subtle: var(--cn-teal-50);
+  --cn-color-on-accent: #ffffff;
+  --cn-color-danger: var(--cn-red-600);
+  --cn-color-danger-hover: var(--cn-red-700);
+  --cn-color-focus: var(--cn-blue-600);
+
+  /* Semantic: status (background / foreground pairs, each pair passes WCAG AA) */
+  --cn-color-neutral-bg: var(--cn-gray-50);
+  --cn-color-neutral-fg: var(--cn-gray-600);
+  --cn-color-info-bg: #e6effb;
+  --cn-color-info-fg: #1f4e8c;
+  --cn-color-success-bg: #e5f4ea;
+  --cn-color-success-fg: #1e6b3a;
+  --cn-color-warning-bg: #fff3d6;
+  --cn-color-warning-fg: #7a4d00;
+  --cn-color-danger-bg: #fdeceb;
+  --cn-color-danger-fg: var(--cn-red-600);
+
+  /* Type */
+  --cn-font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --cn-font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --cn-text-xs: 0.75rem;
+  --cn-text-sm: 0.875rem;
+  --cn-text-md: 1rem;
+  --cn-text-lg: 1.25rem;
+  --cn-text-xl: 1.75rem;
+
+  /* Space, shape, depth */
+  --cn-space-1: 0.25rem;
+  --cn-space-2: 0.5rem;
+  --cn-space-3: 0.75rem;
+  --cn-space-4: 1rem;
+  --cn-space-6: 1.5rem;
+  --cn-space-8: 2rem;
+  --cn-radius-sm: 4px;
+  --cn-radius-md: 6px;
+  --cn-radius-lg: 10px;
+  --cn-shadow-overlay: 0 12px 32px rgb(16 24 32 / 0.18), 0 2px 6px rgb(16 24 32 / 0.08);
+  --cn-control-height-sm: 2rem;
+  --cn-control-height-md: 2.5rem;
+
+  /* Motion */
+  --cn-duration-fast: 120ms;
+  --cn-duration-medium: 200ms;
+  --cn-ease: cubic-bezier(0.2, 0, 0, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --cn-color-bg: #0f1419;
+    --cn-color-surface: #161d24;
+    --cn-color-surface-sunken: #0b1015;
+    --cn-color-text: #e6eaee;
+    --cn-color-text-muted: #9aa5b1;
+    --cn-color-border: #2a343e;
+    --cn-color-border-strong: #5d6975;
+    --cn-color-accent: #4fc1b9;
+    --cn-color-accent-hover: #73d3cc;
+    --cn-color-accent-subtle: #10302e;
+    --cn-color-on-accent: #062523;
+    --cn-color-danger: #f97066;
+    --cn-color-danger-hover: #fb9189;
+    --cn-color-focus: #7aa7ff;
+    --cn-color-neutral-bg: #222b34;
+    --cn-color-neutral-fg: #b8c1cb;
+    --cn-color-info-bg: #13284a;
+    --cn-color-info-fg: #9cc3ff;
+    --cn-color-success-bg: #12301f;
+    --cn-color-success-fg: #7dd9a0;
+    --cn-color-warning-bg: #3a2a0a;
+    --cn-color-warning-fg: #f5c66b;
+    --cn-color-danger-bg: #3d1512;
+    --cn-color-danger-fg: #f97066;
+    --cn-shadow-overlay: 0 12px 32px rgb(0 0 0 / 0.5);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --cn-color-bg: #0f1419;
+  --cn-color-surface: #161d24;
+  --cn-color-surface-sunken: #0b1015;
+  --cn-color-text: #e6eaee;
+  --cn-color-text-muted: #9aa5b1;
+  --cn-color-border: #2a343e;
+  --cn-color-border-strong: #5d6975;
+  --cn-color-accent: #4fc1b9;
+  --cn-color-accent-hover: #73d3cc;
+  --cn-color-accent-subtle: #10302e;
+  --cn-color-on-accent: #062523;
+  --cn-color-danger: #f97066;
+  --cn-color-danger-hover: #fb9189;
+  --cn-color-focus: #7aa7ff;
+  --cn-color-neutral-bg: #222b34;
+  --cn-color-neutral-fg: #b8c1cb;
+  --cn-color-info-bg: #13284a;
+  --cn-color-info-fg: #9cc3ff;
+  --cn-color-success-bg: #12301f;
+  --cn-color-success-fg: #7dd9a0;
+  --cn-color-warning-bg: #3a2a0a;
+  --cn-color-warning-fg: #f5c66b;
+  --cn-color-danger-bg: #3d1512;
+  --cn-color-danger-fg: #f97066;
+  --cn-shadow-overlay: 0 12px 32px rgb(0 0 0 / 0.5);
+  color-scheme: dark;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --cn-duration-fast: 0ms;
+    --cn-duration-medium: 0ms;
+  }
+}
