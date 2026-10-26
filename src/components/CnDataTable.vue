@@ -6,7 +6,8 @@ import type { BadgeTone } from './CnBadge.vue'
 export interface TableColumn {
   key: string
   label: string
-  type?: 'text' | 'number' | 'currency' | 'badge'
+  /** `date` expects an ISO date string (YYYY-MM-DD), which also sorts correctly as text. */
+  type?: 'text' | 'number' | 'currency' | 'date' | 'badge'
   sortable?: boolean
   /** For `badge` columns: maps a cell value to a badge tone. */
   tones?: Record<string, BadgeTone>
@@ -65,11 +66,13 @@ const rows = computed(() => {
 
 const currency = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 })
 const number = new Intl.NumberFormat('en-US')
+const date = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
 
 function format(value: unknown, column: TableColumn) {
   if (value == null || value === '') return '—'
   if (column.type === 'currency' && typeof value === 'number') return currency.format(value)
   if (column.type === 'number' && typeof value === 'number') return number.format(value)
+  if (column.type === 'date' && typeof value === 'string') return date.format(new Date(`${value}T00:00:00Z`))
   return String(value)
 }
 

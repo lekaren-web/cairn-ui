@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
 import { ref } from 'vue'
 import { CnCombobox } from '../src'
-import data from '../data/prices.json'
+import data from '../data/rotations.json'
 
-const meta = { title: 'Case studies/Procedure picker: before and after' } satisfies Meta
+const meta = { title: 'Case studies/Specialty picker: before and after' } satisfies Meta
 
 export default meta
 type Story = StoryObj<typeof meta>
@@ -19,10 +19,10 @@ type Story = StoryObj<typeof meta>
 export const Before: Story = {
   parameters: { a11y: { test: 'todo' } },
   render: () => ({
-    setup: () => ({ open: ref(false), picked: ref('Choose a procedure'), options: data.procedures }),
+    setup: () => ({ open: ref(false), picked: ref('Choose a specialty'), options: data.specialties }),
     template: `
       <div style="max-width:420px; min-height:340px; font-family: var(--cn-font-sans); color: var(--cn-color-text)">
-        <div style="font-size:14px; font-weight:600; margin-bottom:4px">Procedure</div>
+        <div style="font-size:14px; font-weight:600; margin-bottom:4px">Specialty</div>
         <div @click="open = !open" style="padding:10px 12px; border:1px solid #ddd; border-radius:6px; background: var(--cn-color-surface); cursor:pointer; font-size:14px">{{ picked }}</div>
         <div v-if="open" style="border:1px solid #ddd; border-radius:6px; margin-top:4px; background: var(--cn-color-surface)">
           <div v-for="o in options" :key="o.value" @click="picked = o.label; open = false" style="padding:8px 12px; font-size:14px; cursor:pointer; color:#999">{{ o.label }}</div>
@@ -34,10 +34,10 @@ export const Before: Story = {
 export const After: Story = {
   render: () => ({
     components: { CnCombobox },
-    setup: () => ({ value: ref(null), options: data.procedures }),
+    setup: () => ({ value: ref(null), options: data.specialties }),
     template: `
       <div style="max-width:420px; min-height:340px">
-        <CnCombobox v-model="value" label="Procedure" placeholder="Search by name or CPT code" :options="options" />
+        <CnCombobox v-model="value" label="Specialty" placeholder="Search specialties" :options="options" />
       </div>`,
   }),
 }

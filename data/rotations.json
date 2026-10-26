@@ -1,0 +1,865 @@
+{
+ "specialties": [
+  {
+   "value": "im",
+   "label": "Internal Medicine",
+   "description": "10 rotations \u00b7 8 weeks"
+  },
+  {
+   "value": "peds",
+   "label": "Pediatrics",
+   "description": "11 rotations \u00b7 6 weeks"
+  },
+  {
+   "value": "surg",
+   "label": "General Surgery",
+   "description": "6 rotations \u00b7 8 weeks"
+  },
+  {
+   "value": "em",
+   "label": "Emergency Medicine",
+   "description": "10 rotations \u00b7 4 weeks"
+  },
+  {
+   "value": "fm",
+   "label": "Family Medicine",
+   "description": "9 rotations \u00b7 6 weeks"
+  },
+  {
+   "value": "psych",
+   "label": "Psychiatry",
+   "description": "12 rotations \u00b7 4 weeks"
+  },
+  {
+   "value": "obgyn",
+   "label": "Obstetrics & Gynecology",
+   "description": "8 rotations \u00b7 6 weeks"
+  },
+  {
+   "value": "neuro",
+   "label": "Neurology",
+   "description": "7 rotations \u00b7 4 weeks"
+  }
+ ],
+ "rotations": {
+  "im": [
+   {
+    "id": "im-3-0",
+    "site": "St. Brigid Regional Medical Center",
+    "location": "Westerville, OH",
+    "setting": "Outpatient",
+    "starts": "2027-01-04",
+    "weeks": 8,
+    "seatsOpen": 0,
+    "seatsTotal": 3,
+    "status": "Full"
+   },
+   {
+    "id": "im-0-1",
+    "site": "Northside General Hospital",
+    "location": "Columbus, OH",
+    "setting": "Inpatient",
+    "starts": "2027-03-01",
+    "weeks": 8,
+    "seatsOpen": 1,
+    "seatsTotal": 6,
+    "status": "Open"
+   },
+   {
+    "id": "im-1-0",
+    "site": "Lakeview Community Hospital",
+    "location": "Dublin, OH",
+    "setting": "Inpatient",
+    "starts": "2027-06-21",
+    "weeks": 8,
+    "seatsOpen": 0,
+    "seatsTotal": 4,
+    "status": "Full"
+   },
+   {
+    "id": "im-2-0",
+    "site": "Riverbend Family Health Center",
+    "location": "Grove City, OH",
+    "setting": "Inpatient",
+    "starts": "2027-06-21",
+    "weeks": 8,
+    "seatsOpen": 6,
+    "seatsTotal": 6,
+    "status": "Open"
+   },
+   {
+    "id": "im-4-0",
+    "site": "University Health Pavilion",
+    "location": "Columbus, OH",
+    "setting": "Outpatient",
+    "starts": "2027-06-21",
+    "weeks": 8,
+    "seatsOpen": 0,
+    "seatsTotal": 6,
+    "status": "Full"
+   },
+   {
+    "id": "im-4-1",
+    "site": "University Health Pavilion",
+    "location": "Columbus, OH",
+    "setting": "Inpatient",
+    "starts": "2027-06-21",
+    "weeks": 8,
+    "seatsOpen": 2,
+    "seatsTotal": 2,
+    "status": "Open"
+   },
+   {
+    "id": "im-0-0",
+    "site": "Northside General Hospital",
+    "location": "Columbus, OH",
+    "setting": "Inpatient",
+    "starts": "2027-08-16",
+    "weeks": 8,
+    "seatsOpen": 1,
+    "seatsTotal": 4,
+    "status": "Open"
+   },
+   {
+    "id": "im-2-1",
+    "site": "Riverbend Family Health Center",
+    "location": "Grove City, OH",
+    "setting": "Inpatient",
+    "starts": "2027-08-16",
+    "weeks": 8,
+    "seatsOpen": 2,
+    "seatsTotal": 2,
+    "status": "Open"
+   },
+   {
+    "id": "im-5-0",
+    "site": "Maple Street Clinic",
+    "location": "Worthington, OH",
+    "setting": "Inpatient",
+    "starts": "2027-10-11",
+    "weeks": 8,
+    "seatsOpen": 1,
+    "seatsTotal": 4,
+    "status": "Open"
+   },
+   {
+    "id": "im-5-1",
+    "site": "Maple Street Clinic",
+    "location": "Worthington, OH",
+    "setting": "Inpatient",
+    "starts": "2027-10-11",
+    "weeks": 8,
+    "seatsOpen": 1,
+    "seatsTotal": 4,
+    "status": "Open"
+   }
+  ],
+  "peds": [
+   {
+    "id": "peds-4-0",
+    "site": "Harbor Children's Hospital",
+    "location": "Columbus, OH",
+    "setting": "Inpatient",
+    "starts": "2027-01-04",
+    "weeks": 6,
+    "seatsOpen": 1,
+    "seatsTotal": 4,
+    "status": "Open"
+   },
+   {
+    "id": "peds-1-0",
+    "site": "Lakeview Community Hospital",
+    "location": "Dublin, OH",
+    "setting": "Inpatient",
+    "starts": "2027-01-04",
+    "weeks": 6,
+    "seatsOpen": 0,
+    "seatsTotal": 2,
+    "status": "Full"
+   },
+   {
+    "id": "peds-6-1",
+    "site": "Maple Street Clinic",
+    "location": "Worthington, OH",
+    "setting": "Outpatient",
+    "starts": "2027-01-04",
+    "weeks": 6,
+    "seatsOpen": 2,
+    "seatsTotal": 4,
+    "status": "Open"
+   },
+   {
+    "id": "peds-0-0",
+    "site": "Northside General Hospital",
+    "location": "Columbus, OH",
+    "setting": "Inpatient",
+    "starts": "2027-01-04",
+    "weeks": 6,
+    "seatsOpen": 2,
+    "seatsTotal": 2,
+    "status": "Open"
+   },
+   {
+    "id": "peds-3-0",
+    "site": "St. Brigid Regional Medical Center",
+    "location": "Westerville, OH",
+    "setting": "Inpatient",
+    "starts": "2027-01-04",
+    "weeks": 6,
+    "seatsOpen": 1,
+    "seatsTotal": 4,
+    "status": "Open"
+   },
+   {
+    "id": "peds-0-1",
+    "site": "Northside General Hospital",
+    "location": "Columbus, OH",
+    "setting": "Outpatient",
+    "starts": "2027-05-10",
+    "weeks": 6,
+    "seatsOpen": 1,
+    "seatsTotal": 2,
+    "status": "Open"
+   },
+   {
+    "id": "peds-2-0",
+    "site": "Riverbend Family Health Center",
+    "location": "Grove City, OH",
+    "setting": "Inpatient",
+    "starts": "2027-05-10",
+    "weeks": 6,
+    "seatsOpen": 1,
+    "seatsTotal": 4,
+    "status": "Open"
+   },
+   {
+    "id": "peds-3-1",
+    "site": "St. Brigid Regional Medical Center",
+    "location": "Westerville, OH",
+    "setting": "Inpatient",
+    "starts": "2027-05-10",
+    "weeks": 6,
+    "seatsOpen": 0,
+    "seatsTotal": 2,
+    "status": "Full"
+   },
+   {
+    "id": "peds-5-0",
+    "site": "University Health Pavilion",
+    "location": "Columbus, OH",
+    "setting": "Inpatient",
+    "starts": "2027-05-10",
+    "weeks": 6,
+    "seatsOpen": 0,
+    "seatsTotal": 6,
+    "status": "Waitlist"
+   },
+   {
+    "id": "peds-2-1",
+    "site": "Riverbend Family Health Center",
+    "location": "Grove City, OH",
+    "setting": "Outpatient",
+    "starts": "2027-06-21",
+    "weeks": 6,
+    "seatsOpen": 3,
+    "seatsTotal": 3,
+    "status": "Open"
+   },
+   {
+    "id": "peds-6-0",
+    "site": "Maple Street Clinic",
+    "location": "Worthington, OH",
+    "setting": "Inpatient",
+    "starts": "2027-08-02",
+    "weeks": 6,
+    "seatsOpen": 0,
+    "seatsTotal": 4,
+    "status": "Full"
+   }
+  ],
+  "surg": [
+   {
+    "id": "surg-3-0",
+    "site": "St. Brigid Regional Medical Center",
+    "location": "Westerville, OH",
+    "setting": "Inpatient",
+    "starts": "2027-01-04",
+    "weeks": 8,
+    "seatsOpen": 0,
+    "seatsTotal": 2,
+    "status": "Full"
+   },
+   {
+    "id": "surg-1-0",
+    "site": "Lakeview Community Hospital",
+    "location": "Dublin, OH",
+    "setting": "Inpatient",
+    "starts": "2027-03-01",
+    "weeks": 8,
+    "seatsOpen": 1,
+    "seatsTotal": 3,
+    "status": "Open"
+   },
+   {
+    "id": "surg-0-0",
+    "site": "Northside General Hospital",
+    "location": "Columbus, OH",
+    "setting": "Inpatient",
+    "starts": "2027-03-01",
+    "weeks": 8,
+    "seatsOpen": 1,
+    "seatsTotal": 3,
+    "status": "Open"
+   },
+   {
+    "id": "surg-5-0",
+    "site": "Maple Street Clinic",
+    "location": "Worthington, OH",
+    "setting": "Inpatient",
+    "starts": "2027-08-16",
+    "weeks": 8,
+    "seatsOpen": 2,
+    "seatsTotal": 4,
+    "status": "Open"
+   },
+   {
+    "id": "surg-2-0",
+    "site": "Riverbend Family Health Center",
+    "location": "Grove City, OH",
+    "setting": "Inpatient",
+    "starts": "2027-08-16",
+    "weeks": 8,
+    "seatsOpen": 1,
+    "seatsTotal": 4,
+    "status": "Open"
+   },
+   {
+    "id": "surg-4-0",
+    "site": "University Health Pavilion",
+    "location": "Columbus, OH",
+    "setting": "Inpatient",
+    "starts": "2027-08-16",
+    "weeks": 8,
+    "seatsOpen": 1,
+    "seatsTotal": 4,
+    "status": "Open"
+   }
+  ],
+  "em": [
+   {
+    "id": "em-5-1",
+    "site": "Maple Street Clinic",
+    "location": "Worthington, OH",
+    "setting": "Emergency",
+    "starts": "2027-01-04",
+    "weeks": 4,
+    "seatsOpen": 1,
+    "seatsTotal": 4,
+    "status": "Open"
+   },
+   {
+    "id": "em-2-1",
+    "site": "Riverbend Family Health Center",
+    "location": "Grove City, OH",
+    "setting": "Emergency",
+    "starts": "2027-01-04",
+    "weeks": 4,
+    "seatsOpen": 0,
+    "seatsTotal": 2,
+    "status": "Full"
+   },
+   {
+    "id": "em-5-0",
+    "site": "Maple Street Clinic",
+    "location": "Worthington, OH",
+    "setting": "Emergency",
+    "starts": "2027-02-01",
+    "weeks": 4,
+    "seatsOpen": 3,
+    "seatsTotal": 3,
+    "status": "Open"
+   },
+   {
+    "id": "em-0-0",
+    "site": "Northside General Hospital",
+    "location": "Columbus, OH",
+    "setting": "Emergency",
+    "starts": "2027-02-01",
+    "weeks": 4,
+    "seatsOpen": 1,
+    "seatsTotal": 3,
+    "status": "Open"
+   },
+   {
+    "id": "em-4-1",
+    "site": "University Health Pavilion",
+    "location": "Columbus, OH",
+    "setting": "Emergency",
+    "starts": "2027-02-01",
+    "weeks": 4,
+    "seatsOpen": 1,
+    "seatsTotal": 3,
+    "status": "Open"
+   },
+   {
+    "id": "em-4-0",
+    "site": "University Health Pavilion",
+    "location": "Columbus, OH",
+    "setting": "Emergency",
+    "starts": "2027-03-01",
+    "weeks": 4,
+    "seatsOpen": 0,
+    "seatsTotal": 6,
+    "status": "Waitlist"
+   },
+   {
+    "id": "em-0-1",
+    "site": "Northside General Hospital",
+    "location": "Columbus, OH",
+    "setting": "Emergency",
+    "starts": "2027-04-26",
+    "weeks": 4,
+    "seatsOpen": 3,
+    "seatsTotal": 3,
+    "status": "Open"
+   },
+   {
+    "id": "em-2-0",
+    "site": "Riverbend Family Health Center",
+    "location": "Grove City, OH",
+    "setting": "Emergency",
+    "starts": "2027-04-26",
+    "weeks": 4,
+    "seatsOpen": 1,
+    "seatsTotal": 2,
+    "status": "Open"
+   },
+   {
+    "id": "em-1-0",
+    "site": "Lakeview Community Hospital",
+    "location": "Dublin, OH",
+    "setting": "Emergency",
+    "starts": "2027-05-24",
+    "weeks": 4,
+    "seatsOpen": 0,
+    "seatsTotal": 6,
+    "status": "Waitlist"
+   },
+   {
+    "id": "em-3-0",
+    "site": "St. Brigid Regional Medical Center",
+    "location": "Westerville, OH",
+    "setting": "Emergency",
+    "starts": "2027-05-24",
+    "weeks": 4,
+    "seatsOpen": 1,
+    "seatsTotal": 4,
+    "status": "Open"
+   }
+  ],
+  "fm": [
+   {
+    "id": "fm-5-1",
+    "site": "Maple Street Clinic",
+    "location": "Worthington, OH",
+    "setting": "Outpatient",
+    "starts": "2027-01-04",
+    "weeks": 6,
+    "seatsOpen": 0,
+    "seatsTotal": 4,
+    "status": "Waitlist"
+   },
+   {
+    "id": "fm-0-0",
+    "site": "Northside General Hospital",
+    "location": "Columbus, OH",
+    "setting": "Outpatient",
+    "starts": "2027-01-04",
+    "weeks": 6,
+    "seatsOpen": 0,
+    "seatsTotal": 2,
+    "status": "Full"
+   },
+   {
+    "id": "fm-3-0",
+    "site": "St. Brigid Regional Medical Center",
+    "location": "Westerville, OH",
+    "setting": "Outpatient",
+    "starts": "2027-01-04",
+    "weeks": 6,
+    "seatsOpen": 2,
+    "seatsTotal": 2,
+    "status": "Open"
+   },
+   {
+    "id": "fm-4-0",
+    "site": "University Health Pavilion",
+    "location": "Columbus, OH",
+    "setting": "Outpatient",
+    "starts": "2027-02-15",
+    "weeks": 6,
+    "seatsOpen": 0,
+    "seatsTotal": 2,
+    "status": "Full"
+   },
+   {
+    "id": "fm-1-0",
+    "site": "Lakeview Community Hospital",
+    "location": "Dublin, OH",
+    "setting": "Outpatient",
+    "starts": "2027-03-29",
+    "weeks": 6,
+    "seatsOpen": 1,
+    "seatsTotal": 3,
+    "status": "Open"
+   },
+   {
+    "id": "fm-5-0",
+    "site": "Maple Street Clinic",
+    "location": "Worthington, OH",
+    "setting": "Outpatient",
+    "starts": "2027-03-29",
+    "weeks": 6,
+    "seatsOpen": 2,
+    "seatsTotal": 2,
+    "status": "Open"
+   },
+   {
+    "id": "fm-3-1",
+    "site": "St. Brigid Regional Medical Center",
+    "location": "Westerville, OH",
+    "setting": "Outpatient",
+    "starts": "2027-05-10",
+    "weeks": 6,
+    "seatsOpen": 2,
+    "seatsTotal": 2,
+    "status": "Open"
+   },
+   {
+    "id": "fm-2-0",
+    "site": "Riverbend Family Health Center",
+    "location": "Grove City, OH",
+    "setting": "Outpatient",
+    "starts": "2027-06-21",
+    "weeks": 6,
+    "seatsOpen": 0,
+    "seatsTotal": 2,
+    "status": "Full"
+   },
+   {
+    "id": "fm-4-1",
+    "site": "University Health Pavilion",
+    "location": "Columbus, OH",
+    "setting": "Outpatient",
+    "starts": "2027-08-02",
+    "weeks": 6,
+    "seatsOpen": 2,
+    "seatsTotal": 2,
+    "status": "Open"
+   }
+  ],
+  "psych": [
+   {
+    "id": "psych-0-1",
+    "site": "Northside General Hospital",
+    "location": "Columbus, OH",
+    "setting": "Outpatient",
+    "starts": "2027-01-04",
+    "weeks": 4,
+    "seatsOpen": 1,
+    "seatsTotal": 2,
+    "status": "Open"
+   },
+   {
+    "id": "psych-3-0",
+    "site": "St. Brigid Regional Medical Center",
+    "location": "Westerville, OH",
+    "setting": "Inpatient",
+    "starts": "2027-01-04",
+    "weeks": 4,
+    "seatsOpen": 1,
+    "seatsTotal": 4,
+    "status": "Open"
+   },
+   {
+    "id": "psych-6-0",
+    "site": "Maple Street Clinic",
+    "location": "Worthington, OH",
+    "setting": "Outpatient",
+    "starts": "2027-02-01",
+    "weeks": 4,
+    "seatsOpen": 1,
+    "seatsTotal": 3,
+    "status": "Open"
+   },
+   {
+    "id": "psych-2-1",
+    "site": "Riverbend Family Health Center",
+    "location": "Grove City, OH",
+    "setting": "Outpatient",
+    "starts": "2027-02-01",
+    "weeks": 4,
+    "seatsOpen": 1,
+    "seatsTotal": 2,
+    "status": "Open"
+   },
+   {
+    "id": "psych-1-0",
+    "site": "Lakeview Community Hospital",
+    "location": "Dublin, OH",
+    "setting": "Outpatient",
+    "starts": "2027-03-29",
+    "weeks": 4,
+    "seatsOpen": 1,
+    "seatsTotal": 6,
+    "status": "Open"
+   },
+   {
+    "id": "psych-1-1",
+    "site": "Lakeview Community Hospital",
+    "location": "Dublin, OH",
+    "setting": "Inpatient",
+    "starts": "2027-03-29",
+    "weeks": 4,
+    "seatsOpen": 0,
+    "seatsTotal": 6,
+    "status": "Full"
+   },
+   {
+    "id": "psych-0-0",
+    "site": "Northside General Hospital",
+    "location": "Columbus, OH",
+    "setting": "Inpatient",
+    "starts": "2027-03-29",
+    "weeks": 4,
+    "seatsOpen": 0,
+    "seatsTotal": 6,
+    "status": "Waitlist"
+   },
+   {
+    "id": "psych-4-0",
+    "site": "University Health Pavilion",
+    "location": "Columbus, OH",
+    "setting": "Outpatient",
+    "starts": "2027-03-29",
+    "weeks": 4,
+    "seatsOpen": 1,
+    "seatsTotal": 3,
+    "status": "Open"
+   },
+   {
+    "id": "psych-5-0",
+    "site": "Westfield Behavioral Health",
+    "location": "Hilliard, OH",
+    "setting": "Outpatient",
+    "starts": "2027-03-29",
+    "weeks": 4,
+    "seatsOpen": 2,
+    "seatsTotal": 3,
+    "status": "Open"
+   },
+   {
+    "id": "psych-2-0",
+    "site": "Riverbend Family Health Center",
+    "location": "Grove City, OH",
+    "setting": "Inpatient",
+    "starts": "2027-04-26",
+    "weeks": 4,
+    "seatsOpen": 1,
+    "seatsTotal": 2,
+    "status": "Open"
+   },
+   {
+    "id": "psych-3-1",
+    "site": "St. Brigid Regional Medical Center",
+    "location": "Westerville, OH",
+    "setting": "Outpatient",
+    "starts": "2027-05-24",
+    "weeks": 4,
+    "seatsOpen": 0,
+    "seatsTotal": 6,
+    "status": "Full"
+   },
+   {
+    "id": "psych-4-1",
+    "site": "University Health Pavilion",
+    "location": "Columbus, OH",
+    "setting": "Inpatient",
+    "starts": "2027-05-24",
+    "weeks": 4,
+    "seatsOpen": 0,
+    "seatsTotal": 4,
+    "status": "Waitlist"
+   }
+  ],
+  "obgyn": [
+   {
+    "id": "obgyn-5-0",
+    "site": "Maple Street Clinic",
+    "location": "Worthington, OH",
+    "setting": "Inpatient",
+    "starts": "2027-01-04",
+    "weeks": 6,
+    "seatsOpen": 0,
+    "seatsTotal": 4,
+    "status": "Waitlist"
+   },
+   {
+    "id": "obgyn-3-0",
+    "site": "St. Brigid Regional Medical Center",
+    "location": "Westerville, OH",
+    "setting": "Inpatient",
+    "starts": "2027-01-04",
+    "weeks": 6,
+    "seatsOpen": 2,
+    "seatsTotal": 4,
+    "status": "Open"
+   },
+   {
+    "id": "obgyn-1-0",
+    "site": "Lakeview Community Hospital",
+    "location": "Dublin, OH",
+    "setting": "Inpatient",
+    "starts": "2027-05-10",
+    "weeks": 6,
+    "seatsOpen": 1,
+    "seatsTotal": 4,
+    "status": "Open"
+   },
+   {
+    "id": "obgyn-2-0",
+    "site": "Riverbend Family Health Center",
+    "location": "Grove City, OH",
+    "setting": "Mixed",
+    "starts": "2027-05-10",
+    "weeks": 6,
+    "seatsOpen": 1,
+    "seatsTotal": 6,
+    "status": "Open"
+   },
+   {
+    "id": "obgyn-4-0",
+    "site": "University Health Pavilion",
+    "location": "Columbus, OH",
+    "setting": "Inpatient",
+    "starts": "2027-06-21",
+    "weeks": 6,
+    "seatsOpen": 1,
+    "seatsTotal": 4,
+    "status": "Open"
+   },
+   {
+    "id": "obgyn-0-0",
+    "site": "Northside General Hospital",
+    "location": "Columbus, OH",
+    "setting": "Inpatient",
+    "starts": "2027-08-02",
+    "weeks": 6,
+    "seatsOpen": 1,
+    "seatsTotal": 2,
+    "status": "Open"
+   },
+   {
+    "id": "obgyn-2-1",
+    "site": "Riverbend Family Health Center",
+    "location": "Grove City, OH",
+    "setting": "Mixed",
+    "starts": "2027-08-02",
+    "weeks": 6,
+    "seatsOpen": 1,
+    "seatsTotal": 6,
+    "status": "Open"
+   },
+   {
+    "id": "obgyn-4-1",
+    "site": "University Health Pavilion",
+    "location": "Columbus, OH",
+    "setting": "Mixed",
+    "starts": "2027-08-02",
+    "weeks": 6,
+    "seatsOpen": 1,
+    "seatsTotal": 3,
+    "status": "Open"
+   }
+  ],
+  "neuro": [
+   {
+    "id": "neuro-3-0",
+    "site": "St. Brigid Regional Medical Center",
+    "location": "Westerville, OH",
+    "setting": "Inpatient",
+    "starts": "2027-02-01",
+    "weeks": 4,
+    "seatsOpen": 1,
+    "seatsTotal": 4,
+    "status": "Open"
+   },
+   {
+    "id": "neuro-4-1",
+    "site": "University Health Pavilion",
+    "location": "Columbus, OH",
+    "setting": "Inpatient",
+    "starts": "2027-02-01",
+    "weeks": 4,
+    "seatsOpen": 1,
+    "seatsTotal": 4,
+    "status": "Open"
+   },
+   {
+    "id": "neuro-5-0",
+    "site": "Maple Street Clinic",
+    "location": "Worthington, OH",
+    "setting": "Outpatient",
+    "starts": "2027-03-29",
+    "weeks": 4,
+    "seatsOpen": 2,
+    "seatsTotal": 6,
+    "status": "Open"
+   },
+   {
+    "id": "neuro-0-0",
+    "site": "Northside General Hospital",
+    "location": "Columbus, OH",
+    "setting": "Outpatient",
+    "starts": "2027-03-29",
+    "weeks": 4,
+    "seatsOpen": 2,
+    "seatsTotal": 2,
+    "status": "Open"
+   },
+   {
+    "id": "neuro-1-0",
+    "site": "Lakeview Community Hospital",
+    "location": "Dublin, OH",
+    "setting": "Outpatient",
+    "starts": "2027-05-24",
+    "weeks": 4,
+    "seatsOpen": 0,
+    "seatsTotal": 3,
+    "status": "Waitlist"
+   },
+   {
+    "id": "neuro-2-0",
+    "site": "Riverbend Family Health Center",
+    "location": "Grove City, OH",
+    "setting": "Inpatient",
+    "starts": "2027-05-24",
+    "weeks": 4,
+    "seatsOpen": 1,
+    "seatsTotal": 2,
+    "status": "Open"
+   },
+   {
+    "id": "neuro-4-0",
+    "site": "University Health Pavilion",
+    "location": "Columbus, OH",
+    "setting": "Outpatient",
+    "starts": "2027-05-24",
+    "weeks": 4,
+    "seatsOpen": 0,
+    "seatsTotal": 3,
+    "status": "Full"
+   }
+  ]
+ }
+}

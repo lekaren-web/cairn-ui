@@ -29,62 +29,62 @@ settings.configure(
     STATICFILES_DIRS=[ROOT / "dist-wc", ROOT / "src" / "tokens"],
 )
 
-DATA = json.loads((ROOT / "data" / "prices.json").read_text())
+DATA = json.loads((ROOT / "data" / "rotations.json").read_text())
 
 COLUMNS = [
-    {"key": "hospital", "label": "Hospital", "sortable": True},
-    {"key": "payer", "label": "Payer", "sortable": True},
-    {"key": "plan", "label": "Plan"},
-    {"key": "rate", "label": "Negotiated rate", "type": "currency", "sortable": True},
-    {"key": "cash", "label": "Cash price", "type": "currency", "sortable": True},
+    {"key": "site", "label": "Site", "sortable": True},
+    {"key": "setting", "label": "Setting", "sortable": True},
+    {"key": "starts", "label": "Starts", "type": "date", "sortable": True},
+    {"key": "weeks", "label": "Weeks", "type": "number"},
+    {"key": "seatsOpen", "label": "Open seats", "type": "number", "sortable": True},
     {
-        "key": "position",
-        "label": "vs. median",
+        "key": "status",
+        "label": "Status",
         "type": "badge",
         "sortable": True,
-        "tones": {"Below median": "success", "Near median": "neutral", "Above median": "warning"},
+        "tones": {"Open": "success", "Waitlist": "warning", "Full": "neutral"},
     },
 ]
 
 
-def find_procedure(code):
-    return next((p for p in DATA["procedures"] if p["value"] == code), None)
+def find_specialty(code):
+    return next((s for s in DATA["specialties"] if s["value"] == code), None)
 
 
 def index(request):
-    code = request.GET.get("code", "70553")
+    code = request.GET.get("specialty", "im")
     return render(
         request,
         "index.html",
         {
             "code": code,
-            "procedure": find_procedure(code),
-            "options_json": json.dumps(DATA["procedures"]),
+            "specialty": find_specialty(code),
+            "options_json": json.dumps(DATA["specialties"]),
             "tabs_json": json.dumps(
-                [{"id": "rates", "label": "Negotiated rates"}, {"id": "about", "label": "About the data"}]
+                [{"id": "rotations", "label": "Rotations"}, {"id": "about", "label": "About the data"}]
             ),
         },
     )
 
 
-def rates(request):
+def rotations(request):
     """HTMX partial: returns a <cn-data-table> configured entirely from server data."""
-    code = request.GET.get("code", "")
-    procedure = find_procedure(code)
-    if procedure is None:
-        raise Http404("Unknown procedure")
+    code = request.GET.get("specialty", "")
+    specialty = find_specialty(code)
+    if specialty is None:
+        raise Http404("Unknown specialty")
     return render(
         request,
-        "partials/rates.html",
+        "partials/rotations.html",
         {
-            "procedure": procedure,
+            "specialty": specialty,
             "columns_json": json.dumps(COLUMNS),
-            "rows_json": json.dumps(DATA["rates"][code]),
+            "rows_json": json.dumps(DATA["rotations"][code]),
         },
     )
 
 
-urlpatterns = [path("", index), path("rates", rates)]
+urlpatterns = [path("", index), path("rotations", rotations)]
 
 if __name__ == "__main__":
     execute_from_command_line(sys.argv)

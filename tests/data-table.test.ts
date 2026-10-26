@@ -25,6 +25,13 @@ afterEach(() => {
 })
 
 describe('CnDataTable', () => {
+  it('formats dates as readable text', () => {
+    const wrapper = mount(CnDataTable, {
+      props: { caption: 'Rotations', columns: [{ key: 'starts', label: 'Starts', type: 'date' }], rows: [{ id: 1, starts: '2027-01-04' }] },
+    })
+    expect(wrapper.get('tbody td').text()).toBe('Jan 4, 2027')
+  })
+
   it('formats currency and right-aligns numeric columns', () => {
     const cell = setup().findAll('tbody td')[1]
     expect(cell.text()).toBe('$1,310')

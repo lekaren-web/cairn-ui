@@ -1,62 +1,62 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue'
 import { CnBadge, CnButton, CnCombobox, CnDataTable, CnDialog, CnTabs } from '../src'
-import type { TableColumn, TableRow, TabItem } from '../src'
-import { fetchRates, procedures } from './api'
+import type { BadgeTone, TableColumn, TableRow, TabItem } from '../src'
+import { fetchRotations, specialties } from './api'
 
-const code = ref<string | null>('70553')
+const specialty = ref<string | null>('im')
 const rows = ref<TableRow[]>([])
 const loading = ref(false)
 const error = ref('')
 const simulateError = ref(false)
-const activeTab = ref('rates')
+const activeTab = ref('rotations')
 const selectedRow = ref<TableRow | null>(null)
 const theme = ref<'light' | 'dark'>(
   window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light',
 )
 
+const statusTones: Record<string, BadgeTone> = { Open: 'success', Waitlist: 'warning', Full: 'neutral' }
+
 const columns: TableColumn[] = [
-  { key: 'hospital', label: 'Hospital', sortable: true },
-  { key: 'payer', label: 'Payer', sortable: true },
-  { key: 'plan', label: 'Plan' },
-  { key: 'rate', label: 'Negotiated rate', type: 'currency', sortable: true },
-  { key: 'cash', label: 'Cash price', type: 'currency', sortable: true },
-  {
-    key: 'position',
-    label: 'vs. median',
-    type: 'badge',
-    sortable: true,
-    tones: { 'Below median': 'success', 'Near median': 'neutral', 'Above median': 'warning' },
-  },
+  { key: 'site', label: 'Site', sortable: true },
+  { key: 'setting', label: 'Setting', sortable: true },
+  { key: 'starts', label: 'Starts', type: 'date', sortable: true },
+  { key: 'weeks', label: 'Weeks', type: 'number' },
+  { key: 'seatsOpen', label: 'Open seats', type: 'number', sortable: true },
+  { key: 'status', label: 'Status', type: 'badge', sortable: true, tones: statusTones },
 ]
 
-const procedure = computed(() => procedures.find((p) => p.value === code.value))
+const current = computed(() => specialties.find((s) => s.value === specialty.value))
 
 const tabs = computed<TabItem[]>(() => [
-  { id: 'rates', label: 'Negotiated rates', count: loading.value || error.value ? undefined : rows.value.length },
+  { id: 'rotations', label: 'Rotations', count: loading.value || error.value ? undefined : rows.value.length },
   { id: 'summary', label: 'Summary' },
   { id: 'about', label: 'About the data' },
 ])
 
 const stats = computed(() => {
-  const rates = rows.value.map((r) => r.rate as number).sort((a, b) => a - b)
-  if (!rates.length) return null
-  const mid = Math.floor(rates.length / 2)
-  const median = rates.length % 2 ? rates[mid] : Math.round((rates[mid - 1] + rates[mid]) / 2)
-  return { min: rates[0], median, max: rates[rates.length - 1], spread: rates[rates.length - 1] / rates[0] }
+  if (!rows.value.length) return null
+  const open = rows.value.filter((r) => r.status === 'Open')
+  return {
+    rotations: rows.value.length,
+    openRotations: open.length,
+    openSeats: rows.value.reduce((sum, r) => sum + (r.seatsOpen as number), 0),
+    sites: new Set(rows.value.map((r) => r.site)).size,
+  }
 })
 
-const usd = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 })
+const longDate = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeZone: 'UTC' })
+const formatDate = (iso: unknown) => longDate.format(new Date(`${iso}T00:00:00Z`))
 
 async function load() {
-  if (!code.value) {
+  if (!specialty.value) {
     rows.value = []
     return
   }
   loading.value = true
   error.value = ''
   try {
-    rows.value = await fetchRates(code.value, { fail: simulateError.value })
+    rows.value = await fetchRotations(specialty.value, { fail: simulateError.value })
   } catch (e) {
     error.value = (e as Error).message
     rows.value = []
@@ -65,7 +65,7 @@ async function load() {
   }
 }
 
-watch(code, load)
+watch(specialty, load)
 onMounted(load)
 watch(theme, (t) => document.documentElement.setAttribute('data-theme', t), { immediate: true })
 </script>
@@ -75,7 +75,7 @@ watch(theme, (t) => document.documentElement.setAttribute('data-theme', t), { im
     <header class="masthead">
       <div>
         <p class="eyebrow">Cairn · Vue 3 surface</p>
-        <h1>Price Explorer</h1>
+        <h1>Rotation Finder</h1>
       </div>
       <div class="masthead__actions">
         <CnBadge tone="info">Sample data</CnBadge>
@@ -87,38 +87,38 @@ watch(theme, (t) => document.documentElement.setAttribute('data-theme', t), { im
 
     <section class="controls" aria-label="Search">
       <CnCombobox
-        v-model="code"
+        v-model="specialty"
         class="controls__combobox"
-        label="Procedure"
-        placeholder="Search by name or CPT code"
-        hint="Try “MRI”, “knee” or “80053”."
-        :options="procedures"
+        label="Specialty"
+        placeholder="Search specialties"
+        hint="Try “surgery”, “peds” or “psych”."
+        :options="specialties"
       />
       <div class="controls__actions">
         <label class="toggle">
           <input id="simulate-error" v-model="simulateError" type="checkbox" />
           Simulate API error
         </label>
-        <CnButton variant="secondary" :loading="loading" loading-label="Refreshing rates" @click="load">
+        <CnButton variant="secondary" :loading="loading" loading-label="Refreshing rotations" @click="load">
           Refresh
         </CnButton>
       </div>
     </section>
 
-    <h2 class="procedure-title">
-      {{ procedure?.label ?? 'Choose a procedure' }}
-      <span v-if="procedure" class="procedure-code">{{ procedure.description }}</span>
+    <h2 class="specialty-title">
+      {{ current?.label ?? 'Choose a specialty' }}
+      <span v-if="current" class="specialty-meta">{{ current.description }}</span>
     </h2>
 
-    <CnTabs v-model="activeTab" label="Procedure details" :tabs="tabs">
-      <template #rates>
+    <CnTabs v-model="activeTab" label="Specialty details" :tabs="tabs">
+      <template #rotations>
         <CnDataTable
-          :caption="`Negotiated rates for ${procedure?.label ?? 'the selected procedure'}`"
+          :caption="`${current?.label ?? 'Selected specialty'} rotations`"
           :columns="columns"
           :rows="rows"
           :loading="loading"
           :error="error"
-          :empty-text="code ? 'No rates published for this procedure.' : 'Choose a procedure to see rates.'"
+          :empty-text="specialty ? 'No rotations scheduled for this specialty.' : 'Choose a specialty to see rotations.'"
           row-action-label="Details"
           @retry="load"
           @row-action="selectedRow = $event"
@@ -126,35 +126,35 @@ watch(theme, (t) => document.documentElement.setAttribute('data-theme', t), { im
       </template>
       <template #summary>
         <dl v-if="stats" class="stats">
-          <div><dt>Lowest rate</dt><dd>{{ usd.format(stats.min) }}</dd></div>
-          <div><dt>Median rate</dt><dd>{{ usd.format(stats.median) }}</dd></div>
-          <div><dt>Highest rate</dt><dd>{{ usd.format(stats.max) }}</dd></div>
-          <div><dt>Spread</dt><dd>{{ stats.spread.toFixed(1) }}×</dd></div>
+          <div><dt>Rotations</dt><dd>{{ stats.rotations }}</dd></div>
+          <div><dt>Open for sign-up</dt><dd>{{ stats.openRotations }}</dd></div>
+          <div><dt>Open seats</dt><dd>{{ stats.openSeats }}</dd></div>
+          <div><dt>Sites</dt><dd>{{ stats.sites }}</dd></div>
         </dl>
         <p v-else class="muted">No summary available yet.</p>
       </template>
       <template #about>
         <p class="prose">
-          Hospitals and payers in this demo are fictional and every price is generated sample data.
-          The structure mirrors real price-transparency files: one negotiated rate per hospital, payer and
-          plan, plus the hospital’s discounted cash price.
+          Every site and rotation here is generated sample data. The shape mirrors a clinical rotation schedule:
+          each row is one block at one site, with its start date, length and remaining seats.
         </p>
       </template>
     </CnTabs>
 
     <CnDialog
       :open="selectedRow !== null"
-      :title="String(selectedRow?.hospital ?? '')"
-      :description="`${selectedRow?.payer} ${selectedRow?.plan} · ${procedure?.description}`"
+      :title="String(selectedRow?.site ?? '')"
+      :description="`${current?.label} · ${selectedRow?.setting}`"
       @close="selectedRow = null"
     >
       <dl v-if="selectedRow" class="detail">
-        <div><dt>Negotiated rate</dt><dd>{{ usd.format(selectedRow.rate as number) }}</dd></div>
-        <div><dt>Cash price</dt><dd>{{ usd.format(selectedRow.cash as number) }}</dd></div>
-        <div><dt>Location</dt><dd>{{ selectedRow.city }}</dd></div>
+        <div><dt>Starts</dt><dd>{{ formatDate(selectedRow.starts) }}</dd></div>
+        <div><dt>Length</dt><dd>{{ selectedRow.weeks }} weeks</dd></div>
+        <div><dt>Seats</dt><dd>{{ selectedRow.seatsOpen }} of {{ selectedRow.seatsTotal }} open</dd></div>
+        <div><dt>Location</dt><dd>{{ selectedRow.location }}</dd></div>
         <div>
-          <dt>vs. median</dt>
-          <dd><CnBadge :tone="selectedRow.position === 'Below median' ? 'success' : selectedRow.position === 'Above median' ? 'warning' : 'neutral'">{{ selectedRow.position }}</CnBadge></dd>
+          <dt>Status</dt>
+          <dd><CnBadge :tone="statusTones[String(selectedRow.status)]">{{ selectedRow.status }}</CnBadge></dd>
         </div>
       </dl>
       <template #footer>
@@ -178,8 +178,8 @@ watch(theme, (t) => document.documentElement.setAttribute('data-theme', t), { im
 .controls__combobox { flex: 1 1 22rem; min-width: 0; }
 .controls__actions { display: flex; align-items: center; gap: var(--cn-space-4); padding-top: 1.5rem; }
 .toggle { display: inline-flex; align-items: center; gap: var(--cn-space-2); font-size: var(--cn-text-sm); color: var(--cn-color-text-muted); }
-.procedure-title { margin: 0; font-size: var(--cn-text-lg); display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--cn-space-3); }
-.procedure-code { font: 500 var(--cn-text-sm) var(--cn-font-mono); color: var(--cn-color-text-muted); }
+.specialty-title { margin: 0; font-size: var(--cn-text-lg); display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--cn-space-3); }
+.specialty-meta { font-size: var(--cn-text-sm); font-weight: 500; color: var(--cn-color-text-muted); }
 .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); gap: var(--cn-space-4); margin: 0; }
 .stats div { padding: var(--cn-space-4); border: 1px solid var(--cn-color-border); border-radius: var(--cn-radius-lg); background: var(--cn-color-surface); }
 .stats dt, .detail dt { font-size: var(--cn-text-xs); color: var(--cn-color-text-muted); }
@@ -188,4 +188,7 @@ watch(theme, (t) => document.documentElement.setAttribute('data-theme', t), { im
 .detail dd { margin: var(--cn-space-1) 0 0; font-weight: 600; font-variant-numeric: tabular-nums; }
 .prose { max-width: 65ch; line-height: 1.6; margin: 0; }
 .muted { color: var(--cn-color-text-muted); }
+@media (max-width: 640px) {
+  .controls__actions { padding-top: 0; width: 100%; justify-content: space-between; }
+}
 </style>

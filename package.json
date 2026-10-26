@@ -11,7 +11,8 @@
     "test": "vitest run",
     "typecheck": "vue-tsc --noEmit",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "build:site": "rm -rf site-dist && vite build --config vite.wc.config.ts && vite build --config vite.demo.config.ts && node scripts/build-static-htmx.mjs && storybook build --quiet -o site-dist/storybook"
   },
   "dependencies": {
     "vue": "3.5"

@@ -34,7 +34,7 @@ describe('CnDialog', () => {
   it('has no axe violations when open', async () => {
     const wrapper = mount(CnDialog, {
       props: { title: 'Rate details', open: true },
-      slots: { default: '<p>Negotiated rate: $1,310</p>' },
+      slots: { default: '<p>Starts Jan 4, 2027 · 8 weeks</p>' },
       attachTo: document.body,
     })
     await nextTick()

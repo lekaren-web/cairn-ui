@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
 import { ref } from 'vue'
 import { CnCombobox } from '../src'
-import data from '../data/prices.json'
+import data from '../data/rotations.json'
 
 const meta = {
   title: 'Components/Combobox',
   component: CnCombobox,
   args: {
-    label: 'Procedure',
-    options: data.procedures,
-    placeholder: 'Search by name or CPT code',
+    label: 'Specialty',
+    options: data.specialties,
+    placeholder: 'Search specialties',
     hint: '',
     disabled: false,
   },
@@ -29,9 +29,9 @@ type Story = StoryObj<typeof meta>
 
 /**
  * Keyboard: ↓/↑ open and move, Enter selects, Escape closes (or clears when closed), Tab leaves.
- * Matching text is underlined, and a live region announces the result count.
+ * Matching text is underlined, the secondary line is searchable too, and a live region announces the result count.
  */
 export const Default: Story = {}
-export const WithSelection: Story = { args: { modelValue: '29881' } }
-export const WithHint: Story = { args: { hint: 'Try “MRI”, “knee” or “80053”.' } }
-export const Disabled: Story = { args: { disabled: true, modelValue: '70553' } }
+export const WithSelection: Story = { args: { modelValue: 'peds' } }
+export const WithHint: Story = { args: { hint: 'Try “surgery”, “peds” or “psych”.' } }
+export const Disabled: Story = { args: { disabled: true, modelValue: 'im' } }

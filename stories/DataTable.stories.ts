@@ -1,26 +1,21 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
 import { CnDataTable } from '../src'
 import type { TableColumn } from '../src'
-import data from '../data/prices.json'
+import data from '../data/rotations.json'
 
 const columns: TableColumn[] = [
-  { key: 'hospital', label: 'Hospital', sortable: true },
-  { key: 'payer', label: 'Payer', sortable: true },
-  { key: 'rate', label: 'Negotiated rate', type: 'currency', sortable: true },
-  { key: 'cash', label: 'Cash price', type: 'currency', sortable: true },
-  {
-    key: 'position',
-    label: 'vs. median',
-    type: 'badge',
-    tones: { 'Below median': 'success', 'Near median': 'neutral', 'Above median': 'warning' },
-  },
+  { key: 'site', label: 'Site', sortable: true },
+  { key: 'setting', label: 'Setting', sortable: true },
+  { key: 'starts', label: 'Starts', type: 'date', sortable: true },
+  { key: 'seatsOpen', label: 'Open seats', type: 'number', sortable: true },
+  { key: 'status', label: 'Status', type: 'badge', tones: { Open: 'success', Waitlist: 'warning', Full: 'neutral' } },
 ]
-const rows = data.rates['70553'].slice(0, 8)
+const rows = data.rotations.im
 
 const meta = {
   title: 'Components/DataTable',
   component: CnDataTable,
-  args: { caption: 'Negotiated rates for MRI brain', columns, rows, loading: false, error: '', rowActionLabel: '' },
+  args: { caption: 'Internal Medicine rotations', columns, rows, loading: false, error: '', rowActionLabel: '' },
 } satisfies Meta<typeof CnDataTable>
 
 export default meta
@@ -32,5 +27,5 @@ export const WithRowAction: Story = { args: { rowActionLabel: 'Details' } }
 export const Loading: Story = { args: { rows: [], loading: true } }
 /** Refresh: existing rows stay in place, dimmed, so nothing jumps. */
 export const Refreshing: Story = { args: { loading: true } }
-export const Error: Story = { args: { rows: [], error: 'The rates service returned 503 (Service Unavailable).' } }
-export const Empty: Story = { args: { rows: [], emptyText: 'No rates published for this procedure.' } }
+export const Error: Story = { args: { rows: [], error: 'The scheduling service returned 503 (Service Unavailable).' } }
+export const Empty: Story = { args: { rows: [], emptyText: 'No rotations scheduled for this specialty.' } }

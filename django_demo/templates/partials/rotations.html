@@ -1,0 +1,10 @@
+<h2 class="specialty-title">
+  {{ specialty.label }} <span class="specialty-meta">{{ specialty.description }}</span>
+</h2>
+{# Django autoescapes the JSON, so it is safe inside a quoted attribute. #}
+<cn-data-table
+  caption="{{ specialty.label }} rotations"
+  columns="{{ columns_json }}"
+  rows="{{ rows_json }}"
+  empty-text="No rotations scheduled for this specialty."
+></cn-data-table>

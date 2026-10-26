@@ -16,7 +16,7 @@ const meta = {
     template: `
       <CnButton variant="secondary" @click="open = true">Remove saved search</CnButton>
       <CnDialog v-bind="args" v-model:open="open">
-        <p style="margin:0">“MRI brain · Columbus, OH” will no longer appear in your saved searches.</p>
+        <p style="margin:0">“Pediatrics · Columbus, OH” will no longer appear in your saved searches.</p>
         <template #footer>
           <CnButton variant="secondary" @click="open = false">Cancel</CnButton>
           <CnButton variant="danger" @click="open = false">Remove</CnButton>

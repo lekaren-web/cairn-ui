@@ -6,3 +6,4 @@ storybook-static
 __pycache__
 *.sqlite3
 .DS_Store
+site-dist

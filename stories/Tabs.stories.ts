@@ -5,9 +5,9 @@ const meta = {
   title: 'Components/Tabs',
   component: CnTabs,
   args: {
-    label: 'Procedure details',
+    label: 'Specialty details',
     tabs: [
-      { id: 'rates', label: 'Negotiated rates', count: 24 },
+      { id: 'rotations', label: 'Rotations', count: 10 },
       { id: 'summary', label: 'Summary' },
       { id: 'about', label: 'About the data' },
     ],
@@ -17,8 +17,8 @@ const meta = {
     setup: () => ({ args }),
     template: `
       <CnTabs v-bind="args">
-        <template #rates><p>24 negotiated rates across 6 hospitals.</p></template>
-        <template #summary><p>Median rate: $1,452.</p></template>
+        <template #rotations><p>10 rotations across 6 sites.</p></template>
+        <template #summary><p>14 open seats.</p></template>
         <template #about><p>All data in this story is sample data.</p></template>
       </CnTabs>`,
   }),

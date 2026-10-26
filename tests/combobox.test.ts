@@ -4,13 +4,13 @@ import { CnCombobox } from '../src'
 import { expectNoAxeViolations } from './axe'
 
 const options = [
-  { value: '70553', label: 'MRI brain, with and without contrast', description: 'CPT 70553' },
-  { value: '29881', label: 'Knee arthroscopy with meniscectomy', description: 'CPT 29881' },
-  { value: '80053', label: 'Comprehensive metabolic panel', description: 'CPT 80053' },
+  { value: 'im', label: 'Internal Medicine', description: '10 rotations · 8 weeks' },
+  { value: 'peds', label: 'Pediatrics', description: '11 rotations · 6 weeks' },
+  { value: 'psych', label: 'Psychiatry', description: '12 rotations · 4 weeks' },
 ]
 
 function setup(props = {}) {
-  return mount(CnCombobox, { props: { label: 'Procedure', options, ...props }, attachTo: document.body })
+  return mount(CnCombobox, { props: { label: 'Specialty', options, ...props }, attachTo: document.body })
 }
 
 afterEach(() => {
@@ -40,32 +40,32 @@ describe('CnCombobox', () => {
     expect(input.attributes('aria-activedescendant')).toBe(second.attributes('id'))
   })
 
-  it('filters by label or code and selects with Enter', async () => {
+  it('filters by label or description and selects with Enter', async () => {
     const wrapper = setup()
     const input = wrapper.get('input')
-    await input.setValue('80053')
+    await input.setValue('4 weeks')
     expect(wrapper.findAll('[role="option"]')).toHaveLength(1)
     await input.trigger('keydown', { key: 'Enter' })
-    expect(wrapper.emitted('update:modelValue')?.[0]).toEqual(['80053'])
-    expect(wrapper.emitted('change')?.[0]).toEqual(['80053'])
+    expect(wrapper.emitted('update:modelValue')?.[0]).toEqual(['psych'])
+    expect(wrapper.emitted('change')?.[0]).toEqual(['psych'])
     expect(input.attributes('aria-expanded')).toBe('false')
   })
 
   it('announces the number of results and the empty state', async () => {
     const wrapper = setup()
     const input = wrapper.get('input')
-    await input.setValue('knee')
+    await input.setValue('pedi')
     expect(wrapper.get('[role="status"]').text()).toBe('1 result available')
     await input.setValue('zzz')
     expect(wrapper.get('[role="status"]').text()).toBe('No matches')
   })
 
   it('Escape closes and restores the selected label; a second Escape clears', async () => {
-    const wrapper = setup({ modelValue: '29881' })
+    const wrapper = setup({ modelValue: 'peds' })
     const input = wrapper.get('input')
-    await input.setValue('mri')
+    await input.setValue('psy')
     await input.trigger('keydown', { key: 'Escape' })
-    expect((input.element as HTMLInputElement).value).toBe('Knee arthroscopy with meniscectomy')
+    expect((input.element as HTMLInputElement).value).toBe('Pediatrics')
     await input.trigger('keydown', { key: 'Escape' })
     expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([null])
   })
@@ -76,7 +76,7 @@ describe('CnCombobox', () => {
   })
 
   it('has no axe violations when open', async () => {
-    const wrapper = setup({ hint: 'Search by name or code' })
+    const wrapper = setup({ hint: 'Search by name' })
     await wrapper.get('input').trigger('keydown', { key: 'ArrowDown' })
     await expectNoAxeViolations(wrapper.element)
   })
