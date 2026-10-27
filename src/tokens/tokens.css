@@ -27,6 +27,7 @@
 
   /* Semantic: surfaces and text */
   --cn-color-bg: var(--cn-gray-25);
+  --cn-color-backdrop: rgb(10 16 22 / 0.45);
   --cn-color-surface: var(--cn-gray-0);
   --cn-color-surface-sunken: var(--cn-gray-50);
   --cn-color-text: var(--cn-gray-900);
@@ -87,6 +88,7 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --cn-color-bg: #0f1419;
+    --cn-color-backdrop: rgb(0 0 0 / 0.6);
     --cn-color-surface: #161d24;
     --cn-color-surface-sunken: #0b1015;
     --cn-color-text: #e6eaee;
@@ -117,6 +119,7 @@
 
 :root[data-theme="dark"] {
   --cn-color-bg: #0f1419;
+  --cn-color-backdrop: rgb(0 0 0 / 0.6);
   --cn-color-surface: #161d24;
   --cn-color-surface-sunken: #0b1015;
   --cn-color-text: #e6eaee;

@@ -95,7 +95,7 @@ onMounted(() => {
 }
 .cn-dialog--sm { width: min(100% - 2rem, 24rem); }
 .cn-dialog--lg { width: min(100% - 2rem, 48rem); }
-.cn-dialog::backdrop { background: rgb(10 16 22 / 0.45); }
+.cn-dialog::backdrop { background: var(--cn-color-backdrop); }
 .cn-dialog[open] { animation: cn-dialog-in var(--cn-duration-medium) var(--cn-ease); }
 @keyframes cn-dialog-in { from { opacity: 0; transform: translateY(8px) scale(0.98); } }
 

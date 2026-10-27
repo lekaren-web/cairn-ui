@@ -68,3 +68,20 @@ npm run build:wc
 - Array props accept JSON strings as attributes, or real arrays as properties (`el.rows = [...]`).
 - Events are `CustomEvent`s with the payload in `event.detail[0]`.
 - Theme tokens are CSS custom properties, which inherit into each shadow root.
+
+## Working on it with AI agents
+
+The repo is set up so coding agents (Claude Code, Codex, Cursor) get the same context and the same
+gate as a person:
+
+- **Context:** [`AGENTS.md`](AGENTS.md) explains the architecture, the Web Component constraints that
+  are easy to get wrong, and the definition of done. `CLAUDE.md` imports it.
+- **Rules as code:** [`tests/contract.test.ts`](tests/contract.test.ts) enforces the rules marked
+  *(enforced)* in AGENTS.md: every component is exported, registered as a custom element, documented
+  in a story and covered by a test with an axe check, and its styles use semantic tokens only.
+- **Gate:** `npm run verify` runs the type-check, all tests and both builds.
+- **Agent hook:** [`.claude/settings.json`](.claude/settings.json) runs
+  [`scripts/agent-verify.sh`](scripts/agent-verify.sh) when Claude Code tries to finish. If files changed
+  and verify fails, the failure goes back to the agent to fix instead of ending the turn.
+- **CI:** [`.github/workflows/verify.yml`](.github/workflows/verify.yml) runs the same gate, plus a
+  Storybook build, on every push and pull request.

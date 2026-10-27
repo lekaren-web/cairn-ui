@@ -1,0 +1,21 @@
+name: Verify
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      # Same gate agents and people run locally: type-check, tests (incl. contract + axe), both builds.
+      - run: npm run verify
+      # Stories are documentation; make sure they still compile.
+      - run: npm run build-storybook -- --quiet

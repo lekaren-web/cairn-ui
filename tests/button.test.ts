@@ -1,6 +1,7 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it, vi } from 'vitest'
 import { CnButton } from '../src'
+import { expectNoAxeViolations } from './axe'
 
 describe('CnButton', () => {
   it('passes clicks through when idle', async () => {
@@ -22,5 +23,10 @@ describe('CnButton', () => {
     expect(wrapper.attributes('disabled')).toBeUndefined()
     expect(wrapper.attributes('aria-busy')).toBe('true')
     expect(wrapper.text()).toContain('Saving')
+  })
+
+  it('has no axe violations, idle or loading', async () => {
+    await expectNoAxeViolations(mount(CnButton, { slots: { default: 'Save' }, attachTo: document.body }).element)
+    await expectNoAxeViolations(mount(CnButton, { props: { loading: true, loadingLabel: 'Saving' }, slots: { default: 'Save' }, attachTo: document.body }).element)
   })
 })
