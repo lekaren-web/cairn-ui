@@ -1,11 +1,16 @@
 /**
- * Web Component entry. The same SFCs are compiled in custom-element mode
- * (see vite.wc.config.ts), so styles are injected into each shadow root and
- * the components work in any HTML page: Django templates, HTMX partials, etc.
- *
- * Props map to attributes (modelValue -> model-value). Array props accept JSON.
- * Events are dispatched as CustomEvents; the payload is in `event.detail[0]`.
+ * Entry point for the Web Component build.
+    
+  This compiles the exact same Vue components in custom-element mode -> Basically this wraps vue components and 
+  registers it as a standard Custom Element.
+ * (its configured in vite.wc.config.ts), bundling each component's styles
+ * straight into its shadow root -> That means you can drop them into any plain HTML page—like Django templates or HTMX partials—without needing Vue!!!!
+
+ * props map to attributes (modelValue -> model-value). Array props accept JSON.
+ * events -> dispatched as CustomEvents; the payload is in `event.detail[0]`.
+ * remember: HTML serializes attributes differently so we need vue camelCase props to be translated into HTML kebab-case attributes.
  */
+
 import { defineCustomElement } from 'vue'
 import CnBadge from './components/CnBadge.vue'
 import CnButton from './components/CnButton.vue'
