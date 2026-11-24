@@ -1,6 +1,7 @@
-// The library's rules as code. AGENTS.md marks these "(enforced)": an agent or a person who adds a
-// component without wiring it up, testing it or keeping it on the semantic token layer fails
-// `npm run verify` here, with a message that says what's missing.
+// Rules as code: enforces every "(enforced)" rule from AGENTS.md.
+// If a dev or agent adds a component without wiring up its exports, tests,
+// or semantic tokens, `npm run verify` fails here and tells them exactly what's missing.
+
 import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
 
