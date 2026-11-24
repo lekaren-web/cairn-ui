@@ -1,14 +1,17 @@
 /*
- * Cairn design tokens.
+ * design tokens.
  *
  * Two layers:
  *   1. Primitives (--cn-teal-600 ...) are raw values. Components never use them directly.
  *   2. Semantic tokens (--cn-color-accent ...) describe intent. Components only read these,
  *      so a theme is just a different mapping of semantic -> primitive.
- *
- * Custom properties inherit through shadow DOM boundaries, which is what lets the
- * Web Component build pick up the same theme as the Vue build with no extra wiring.
- */
+
+Shout Outs:
+ * Brad Frost’s Atomic Design and Nathan Curtis’s posts on design tokens to help organize tokens.css.
+
+Note: add contract rule to block raw hex values if not added already. 
+*/
+
 :root {
   /* Primitives */
   --cn-gray-0: #ffffff;
