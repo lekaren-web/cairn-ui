@@ -1,3 +1,6 @@
+<!--
+Heydon Pickering article  keyboard-accessible horizontal scrolling and accessible column sorting.
+!-->
 <script setup lang="ts">
 import { computed, ref, useId } from 'vue'
 import { parseList } from '../utils/parse'
